@@ -1,0 +1,22 @@
+Build.PL
+lib/Test/Fixme.pm
+MANIFEST			This list of files
+META.yml
+t/check_project.t
+t/dirs/deep/deep_a.txt
+t/dirs/deep/deep_b.txt
+t/dirs/deep/one/deep_one_a.txt
+t/dirs/deep/one/deep_one_b.txt
+t/dirs/deep/two/deep_two_a.txt
+t/dirs/deep/two/deep_two_b.txt
+t/dirs/normal/four.pod
+t/dirs/normal/one.txt
+t/dirs/normal/three.pm
+t/dirs/normal/two.pl
+t/dirs/types/normal.txt
+t/format_results.t
+t/list_files.t
+t/load_file.t
+t/scan_file.t
+t/skip_all.t
+t/test-fixme.t
