@@ -1,0 +1,6 @@
+Changes
+
+0.03 - switched to makemaker
+       changed tests to give better errors
+       filter out CVS and Subversion files from those tested
+       

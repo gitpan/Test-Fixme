@@ -14,7 +14,7 @@ use vars qw( @ISA @EXPORT );
 @EXPORT = qw( run_tests );
 
 our $VERSION;
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 my $Test = Test::Builder->new;
 
@@ -108,7 +108,12 @@ sub list_files {
     croak "The directory '$path' does not exist" unless -d $path;
 
     # Find files using File::Finder.
-    @files = File::Finder->type('f')->in($path);
+    @files =
+      sort    # sort the files
+      grep { !-l $_ }      # no symbolic links
+      grep { !m{.svn} }    # no Subversion directory contents
+      grep { !m{CVS/} }    # no CVS directory contents
+      File::Finder->type('f')->in($path);
 
     return @files;
 }
@@ -123,6 +128,10 @@ sub load_file {
     my $content = read_file($filename);
     return $content;
 }
+
+1;
+
+__END__
 
 =head1 NAME
  

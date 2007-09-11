@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 10;
+use Test::More tests => 11;
 
 # Load the module.
 use_ok 'Test::Fixme';
@@ -24,44 +24,39 @@ use_ok 'Test::Fixme';
 
 {    # Test the list_files function.
     my $dir    = 't/dirs/normal';
-    my @files  = strip_cvs( sort( Test::Fixme::list_files($dir) ) );
+    my @files  = Test::Fixme::list_files($dir);
     my @wanted = sort map { "$dir/$_" } qw( one.txt two.pl three.pm four.pod );
-    ok eq_array( \@files, \@wanted ),
-      "check correct files returned from '$dir'";
+    is_deeply( \@files, \@wanted, "check correct files returned from '$dir'" );
 }
 
 {    # Check that the search descends into sub folders.
     my $dir    = 't/dirs/deep';
-    my @files  = strip_cvs( sort( Test::Fixme::list_files($dir) ) );
+    my @files  = Test::Fixme::list_files($dir);
     my @wanted = sort map { "$dir/$_" }
       map { "$_.txt" }
       qw'deep_a deep_b
       one/deep_one_a one/deep_one_b
       two/deep_two_a two/deep_two_b';
-    ok eq_array( \@files, \@wanted ),
-      "check correct files returned from '$dir'";
+    is_deeply( \@files, \@wanted, "check correct files returned from '$dir'" );
 }
 
 SKIP: {    # Check that non files do not get returned.
-    skip "cannot create symlink", 3 unless eval { symlink( "", "" ); 1 };
+    skip "cannot create symlink", 4 unless eval { symlink( "", "" ); 1 };
 
-    my $dir = 't/dirs/types';
+    my $dir         = "t/dirs/types";
+    my $target      = "normal.txt";
+    my $target_file = "$dir/$target";
+    my $symlink     = "$dir/symlink";
 
     # Make a symbolic link
-    ok symlink( "normal.txt", "$dir/symlink" ), "create symlinked file";
+    ok symlink( $target, $symlink ), "create symlinked file";
+    ok -e $symlink, "symlink now exists";
 
-    my @files  = strip_cvs( sort( Test::Fixme::list_files($dir) ) );
-    my @wanted = ("$dir/normal.txt");
+    my @files  = Test::Fixme::list_files($dir);
+    my @wanted = ($target_file);
 
-    ok eq_array( \@files, \@wanted ),
-      "check that non files are not returned from '$dir'";
-    ok unlink("$dir/symlink"), "delete symlinked file";
-}
+    is_deeply( \@files, \@wanted,
+        "check that non files are not returned from '$dir'" );
 
-# Utility sub to strip out CVS related files.
-# Strip out all files starting with 'E' or 'R' or ending with ',t'.
-sub strip_cvs {
-    my @in = @_;
-    my @out = grep { !m/[ER]/ } grep { !m/,t$/ } @in;
-    return @out;
+    ok unlink($symlink), "delete symlinked file";
 }

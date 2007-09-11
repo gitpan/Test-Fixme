@@ -1,7 +1,8 @@
-Build.PL
+Changes
 lib/Test/Fixme.pm
+Makefile.PL
 MANIFEST			This list of files
-META.yml
+README
 t/check_project.t
 t/dirs/deep/deep_a.txt
 t/dirs/deep/deep_b.txt
@@ -20,3 +21,4 @@ t/load_file.t
 t/scan_file.t
 t/skip_all.t
 t/test-fixme.t
+META.yml                                 Module meta-data (added by MakeMaker)

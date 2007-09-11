@@ -1,22 +1,16 @@
 --- #YAML:1.0
-name: Test-Fixme
-version: 0.01
-author:
-  - |-
-    Edmund von der Burg E<lt>evdb@ecclestoad.co.ukE<gt>
-  - |-
-    Please let me know if you have any comments or suggestions.
-  - L<http://ecclestoad.co.uk/>
-abstract: check code for FIXMEs.
-license: perl
-requires:
-  Carp: 0
-  File::Finder: 0
-  File::Slurp: 0
-  Module::Build: 0
-  Test::Builder: 0
-provides:
-  Test::Fixme:
-    file: lib/Test/Fixme.pm
-    version: 0.01
-generated_by: Module::Build version 0.25
+name:                Test-Fixme
+version:             0.02
+abstract:            ~
+license:             ~
+generated_by:        ExtUtils::MakeMaker version 6.32
+distribution_type:   module
+requires:     
+    Carp:                          0
+    File::Finder:                  0
+    File::Slurp:                   0
+    Test::Builder:                 0
+    Test::More:                    0
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
+    version: 1.2

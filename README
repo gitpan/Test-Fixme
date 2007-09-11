@@ -1,0 +1,64 @@
+NAME
+    Test::Fixme - check code for FIXMEs.
+
+SYNOPSIS
+        # In a test script like 't/test-fixme.t'
+        use Test::Fixme;
+        run_tests();
+
+        # You can also tailor the behaviour.
+        use Test::Fixme;
+        run_tests( where    => 'lib',      # where to find files to check
+                   match    => 'TODO',     # what to check for
+                   skip_all => $ENV{SKIP}  # should all tests be skipped
+        );
+
+DESCRIPTION
+    When coding it is common to come up against problems that need to be
+    addressed but that are not a big deal at the moment. What generally
+    happens is that the coder adds comments like:
+
+     # FIXME - what about windows that are bigger than the screen?
+
+     # FIXME - add checking of user priviledges here.
+
+    Test::Fixme allows you to add a test file that ensures that none of
+    these get forgotten in the module.
+
+  Arguments
+    By default run_tests will search for 'FIXME' in all the files it can
+    find in the project. You can change these defaults by using 'where' or
+    'match' as follows:
+
+        run_tests( where => 'lib', # just check the modules.
+                   match => 'TODO' # look for things that are not done yet.
+        );
+
+HINTS
+    If you want to match something other than 'FIXME' then you may find that
+    the test file itself is being caught. Try doing this:
+
+        run_tests( match => 'TO'.'DO' );
+
+    You may also wish to suppress the tests - try this:
+
+        use Test::Fixme;
+        run_tests( skip_all => $ENV{SKIP_TEST_FIXME} );
+
+    You can only run run_tests once per file. Please use several test files
+    if you want to run several different tests.
+
+SEE ALSO
+    Devel::FIXME
+
+AUTHOR
+    Edmund von der Burg <evdb@ecclestoad.co.uk>
+
+    Please let me know if you have any comments or suggestions.
+
+    <http://ecclestoad.co.uk/>
+
+LICENSE
+    This library is free software . You can redistribute it and/or modify it
+    under the same terms as perl itself.
+
