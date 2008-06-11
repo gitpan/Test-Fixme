@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 11;
+use Test::More tests => 13;
 
 # Load the module.
 use_ok 'Test::Fixme';
@@ -18,7 +18,8 @@ use_ok 'Test::Fixme';
     local $SIG{__WARN__} = sub { 1 };
     eval { my @files = Test::Fixme::list_files(); };
     ok $@, 'list_files died';
-    ok $@ =~ m:^You need to specify which directory to scan:,
+    like $@,
+qr{^You must specify a single directory, or reference to a list of directories},
       "check that no directory causes 'die'";
 }
 
@@ -40,8 +41,25 @@ use_ok 'Test::Fixme';
     is_deeply( \@files, \@wanted, "check correct files returned from '$dir'" );
 }
 
+{    # Check that we can scan a reference to a list of dirnames
+    my @dirs  = qw( t/dirs/normal t/dirs/deep/one );
+    my @files = Test::Fixme::list_files( \@dirs );
+    my @wanted =
+      sort qw(t/dirs/deep/one/deep_one_a.txt t/dirs/deep/one/deep_one_b.txt ),
+      map { "t/dirs/normal/$_" } qw( one.txt two.pl three.pm four.pod );
+    is_deeply( \@files, \@wanted,
+        "check correct files returned from " . join( ', ', @dirs ) );
+}
+
+{    # Test the list_files function with a filename_match regex
+    my $dir    = 't/dirs/normal';
+    my @files  = Test::Fixme::list_files( $dir, qr/\.(?:pl|pm)$/ );
+    my @wanted = sort map { "$dir/$_" } qw( two.pl three.pm );
+    is_deeply( \@files, \@wanted, "check correct files returned from '$dir'" );
+}
+
 SKIP: {    # Check that non files do not get returned.
-    skip "cannot create symlink", 4 unless eval { symlink( "", "" ); 1 };
+    skip( "cannot create symlink", 4 ) unless eval { symlink( "", "" ); 1 };
 
     my $dir         = "t/dirs/types";
     my $target      = "normal.txt";

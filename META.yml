@@ -1,12 +1,13 @@
 --- #YAML:1.0
 name:                Test-Fixme
-version:             0.02
+version:             0.03
 abstract:            ~
 license:             ~
 generated_by:        ExtUtils::MakeMaker version 6.32
 distribution_type:   module
 requires:     
     Carp:                          0
+    ExtUtils::MakeMaker:           0
     File::Finder:                  0
     File::Slurp:                   0
     Test::Builder:                 0

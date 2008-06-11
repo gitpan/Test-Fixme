@@ -14,7 +14,7 @@ use vars qw( @ISA @EXPORT );
 @EXPORT = qw( run_tests );
 
 our $VERSION;
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 my $Test = Test::Builder->new;
 
@@ -24,12 +24,14 @@ sub run_tests {
     my %args = @_;
     $args{match} = 'FIXME' unless defined $args{match} && length $args{match};
     $args{where} = '.'     unless defined $args{where} && length $args{where};
+    $args{filename_match} = qr/./
+      unless defined $args{filename_match} && length $args{filename_match};
 
     # Skip all tests if instructed to.
     $Test->skip_all("All tests skipped.") if $args{skip_all};
 
     # Get files to work with and set the plan.
-    my @files = list_files( $args{where} );
+    my @files = list_files( $args{where}, $args{filename_match} );
     $Test->plan( tests => scalar @files );
 
     # Check ech file in turn.
@@ -98,22 +100,54 @@ sub format_file_results {
 }
 
 sub list_files {
-    my $path = shift;
-    croak "You need to specify which directory to scan"
-      unless defined $path && length $path;
+    my $path_arg = shift;
+    croak
+'You must specify a single directory, or reference to a list of directories'
+      unless defined $path_arg;
+
+    my $filename_match = shift;
+    if ( !defined $filename_match ) {
+
+        # Filename match defaults to matching any single character, for
+        # backwards compatibility with one-arg list_files() invocation
+        $filename_match = qr/./;
+    }
+
+    my @paths;
+    if ( ref $path_arg eq 'ARRAY' ) {
+
+        # Ref to array
+        @paths = @{$path_arg};
+    }
+    elsif ( ref $path_arg eq '' ) {
+
+        # one path
+        @paths = ($path_arg);
+    }
+    else {
+
+        # something else
+        croak
+'Argument to list_files must be a single path, or a reference to an array of paths';
+    }
 
     my @files = ();
 
-    # Die if we got a bad dir.
-    croak "The directory '$path' does not exist" unless -d $path;
+    foreach my $path (@paths) {
+
+        # Die if we got a bad dir.
+        croak "The directory '$path' does not exist" unless -d $path;
+        push @files, File::Finder->type('f')->in($path);
+    }
 
     # Find files using File::Finder.
     @files =
       sort    # sort the files
-      grep { !-l $_ }      # no symbolic links
-      grep { !m{.svn} }    # no Subversion directory contents
-      grep { !m{CVS/} }    # no CVS directory contents
-      File::Finder->type('f')->in($path);
+      grep { m/$filename_match/ }
+      grep { !-l $_ }               # no symbolic links
+      grep { !m{.svn} }             # no Subversion directory contents
+      grep { !m{CVS/} }             # no CVS directory contents
+      @files;
 
     return @files;
 }
@@ -173,6 +207,32 @@ find in the project. You can change these defaults by using 'where' or
                match => 'TODO' # look for things that are not done yet.
     );
 
+=over 4
+
+=item where
+
+Specifies where to search for files.  This can be a scalar containing a
+single directory name, or it can be a listref containing multiple
+directory names.
+
+=item match
+
+Expression to search for within the files.  This may be a simple
+string, or a qr//-quoted regular expression.  For example:
+
+    match => qr/[T]ODO|[F]IXME|[B]UG/,
+
+=item filename_match
+
+Expression to filter file names.  This should be a qr//-quoted regular
+expression.  For example:
+
+    match => qr/\.(:pm|pl)$/,
+
+would only match .pm and .pl files under your specified directory.
+
+=back
+
 =head1 HINTS
 
 If you want to match something other than 'FIXME' then you may find
@@ -199,12 +259,17 @@ Edmund von der Burg E<lt>evdb@ecclestoad.co.ukE<gt>
 Please let me know if you have any comments or suggestions.
 
 L<http://ecclestoad.co.uk/>
- 
+
+=head1 ACKNOWLEDGMENTS
+
+Dave O'Neill added support for 'filename_match' and also being able to pass a
+list of several directories in the 'where' argument. Many thanks.
+
 =head1 LICENSE
- 
-This library is free software . You can redistribute it and/or modify
-it under the same terms as perl itself.
- 
+
+This library is free software . You can redistribute it and/or modify it under
+the same terms as perl itself.
+
 =cut
 
 1;

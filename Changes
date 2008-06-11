@@ -1,6 +1,13 @@
 Changes
 
-0.03 - switched to makemaker
+0.03 - Wed Jun 11 19:24:59 BST 2008
+     - version bump to release to CPAN
+
+0.02_01 - Tue, 10 Jun 2008 15:11:01 -0400 dmo
+	- allow list of directory names to be specified in 'where' argument
+	- add 'filename_match' argument to filter for desired filenames
+
+0.02 - switched to makemaker
        changed tests to give better errors
        filter out CVS and Subversion files from those tested
-       
+
