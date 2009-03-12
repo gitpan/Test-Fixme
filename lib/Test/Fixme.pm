@@ -14,7 +14,7 @@ use vars qw( @ISA @EXPORT );
 @EXPORT = qw( run_tests );
 
 our $VERSION;
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 my $Test = Test::Builder->new;
 
@@ -266,6 +266,8 @@ Dave O'Neill added support for 'filename_match' and also being able to pass a
 list of several directories in the 'where' argument. Many thanks.
 
 =head1 LICENSE
+
+Copryight (C) 2008 Edmund von der Burg C<<evdb@ecclestoad.co.uk>>
 
 This library is free software . You can redistribute it and/or modify it under
 the same terms as perl itself.

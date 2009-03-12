@@ -1,7 +1,10 @@
 Changes
 
+0.04 - Thu 12 Mar 2009 22:51:51 GMT
+     - Added copyright info
+
 0.03 - Wed Jun 11 19:24:59 BST 2008
-     - version bump to release to CPAN
+     - version bump to release to CPAN§
 
 0.02_01 - Tue, 10 Jun 2008 15:11:01 -0400 dmo
 	- allow list of directory names to be specified in 'where' argument
