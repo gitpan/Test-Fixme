@@ -1,17 +1,28 @@
---- #YAML:1.0
-name:                Test-Fixme
-version:             0.04
-abstract:            ~
-license:             ~
-generated_by:        ExtUtils::MakeMaker version 6.32
-distribution_type:   module
-requires:     
-    Carp:                          0
-    ExtUtils::MakeMaker:           0
-    File::Finder:                  0
-    File::Slurp:                   0
-    Test::Builder:                 0
-    Test::More:                    0
+---
+abstract: 'check code for FIXMEs.'
+author:
+  - 'Graham Ollis <plicease@wdlabs.com'
+  - 'Edmund von der Burg <evdb@ecclestoad.co.uk>'
+build_requires:
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.120921'
+license: unknown
 meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
-    version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Test-Fixme
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  Carp: 0
+  ExtUtils::MakeMaker: 0
+  File::Find: 0
+  File::Slurp: 0
+  Test::Builder: 0
+  Test::More: 0
+version: 0.05

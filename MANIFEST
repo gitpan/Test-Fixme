@@ -21,4 +21,6 @@ t/load_file.t
 t/scan_file.t
 t/skip_all.t
 t/test-fixme.t
+t/skip_git.t
 META.yml                                 Module meta-data (added by MakeMaker)
+META.json

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Carp;
-use File::Finder;
+use File::Find;
 use File::Slurp;
 
 use Test::Builder;
@@ -14,7 +14,7 @@ use vars qw( @ISA @EXPORT );
 @EXPORT = qw( run_tests );
 
 our $VERSION;
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 my $Test = Test::Builder->new;
 
@@ -131,22 +131,32 @@ sub list_files {
 'Argument to list_files must be a single path, or a reference to an array of paths';
     }
 
-    my @files = ();
-
     foreach my $path (@paths) {
 
         # Die if we got a bad dir.
         croak "The directory '$path' does not exist" unless -d $path;
-        push @files, File::Finder->type('f')->in($path);
     }
 
-    # Find files using File::Finder.
+    my @files;
+    find(
+        {
+            preprocess => sub {
+                # no GIT, Subversion or CVS directory contents
+                grep !/^(.git|.svn|CVS)$/, @_,
+            },
+            wanted => sub {
+                push @files, $File::Find::name
+                    if -f $File::Find::name;
+            },
+            no_chdir => 1,
+        },
+        @paths
+    );
+
     @files =
       sort    # sort the files
       grep { m/$filename_match/ }
       grep { !-l $_ }               # no symbolic links
-      grep { !m{.svn} }             # no Subversion directory contents
-      grep { !m{CVS/} }             # no CVS directory contents
       @files;
 
     return @files;
@@ -253,12 +263,12 @@ files if you want to run several different tests.
 L<Devel::FIXME>
 
 =head1 AUTHOR
- 
-Edmund von der Burg E<lt>evdb@ecclestoad.co.ukE<gt>
+
+Current maintainer: Graham Ollis E<lt>plicease@wdlabs.comE<gt>
 
 Please let me know if you have any comments or suggestions.
 
-L<http://ecclestoad.co.uk/>
+Original author: Edmund von der Burg E<lt>evdb@ecclestoad.co.ukE<gt>
 
 =head1 ACKNOWLEDGMENTS
 
@@ -267,7 +277,9 @@ list of several directories in the 'where' argument. Many thanks.
 
 =head1 LICENSE
 
-Copryight (C) 2008 Edmund von der Burg C<<evdb@ecclestoad.co.uk>>
+Copryight (C) 2008 Edmund von der Burg
+
+Copyright (C) 2012 Graham Ollis
 
 This library is free software . You can redistribute it and/or modify it under
 the same terms as perl itself.

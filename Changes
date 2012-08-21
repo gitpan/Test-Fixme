@@ -1,5 +1,9 @@
 Changes
 
+0.05
+     - Use File::Find instead of File::Finder
+     - skip .git directory, like .svn and CSV
+
 0.04 - Thu 12 Mar 2009 22:51:51 GMT
      - Added copyright info
 

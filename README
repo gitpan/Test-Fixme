@@ -34,6 +34,25 @@ DESCRIPTION
                    match => 'TODO' # look for things that are not done yet.
         );
 
+    where
+        Specifies where to search for files. This can be a scalar containing
+        a single directory name, or it can be a listref containing multiple
+        directory names.
+
+    match
+        Expression to search for within the files. This may be a simple
+        string, or a qr//-quoted regular expression. For example:
+
+            match => qr/[T]ODO|[F]IXME|[B]UG/,
+
+    filename_match
+        Expression to filter file names. This should be a qr//-quoted
+        regular expression. For example:
+
+            match => qr/\.(:pm|pl)$/,
+
+        would only match .pm and .pl files under your specified directory.
+
 HINTS
     If you want to match something other than 'FIXME' then you may find that
     the test file itself is being caught. Try doing this:
@@ -52,13 +71,21 @@ SEE ALSO
     Devel::FIXME
 
 AUTHOR
-    Edmund von der Burg <evdb@ecclestoad.co.uk>
+    Current maintainer: Graham Ollis <plicease@wdlabs.com>
 
     Please let me know if you have any comments or suggestions.
 
-    <http://ecclestoad.co.uk/>
+    Original author: Edmund von der Burg <evdb@ecclestoad.co.uk>
+
+ACKNOWLEDGMENTS
+    Dave O'Neill added support for 'filename_match' and also being able to
+    pass a list of several directories in the 'where' argument. Many thanks.
 
 LICENSE
+    Copryight (C) 2008 Edmund von der Burg
+
+    Copyright (C) 2012 Graham Ollis
+
     This library is free software . You can redistribute it and/or modify it
     under the same terms as perl itself.
 
