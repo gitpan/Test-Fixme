@@ -5,7 +5,7 @@ use warnings;
 
 use Carp;
 use File::Find;
-use File::Slurp;
+use ExtUtils::Manifest qw( maniread );
 
 use Test::Builder;
 require Exporter;
@@ -14,7 +14,7 @@ use vars qw( @ISA @EXPORT );
 @EXPORT = qw( run_tests );
 
 our $VERSION;
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 my $Test = Test::Builder->new;
 
@@ -31,7 +31,12 @@ sub run_tests {
     $Test->skip_all("All tests skipped.") if $args{skip_all};
 
     # Get files to work with and set the plan.
-    my @files = list_files( $args{where}, $args{filename_match} );
+    my @files;
+    if(defined $args{manifest}) {
+        @files = keys %{ maniread( $args{manifest} ) };
+    } else {
+        @files = list_files( $args{where}, $args{filename_match} );
+    }
     $Test->plan( tests => scalar @files );
 
     # Check ech file in turn.
@@ -169,7 +174,9 @@ sub load_file {
     return undef unless -f $filename;
 
     # Slurp the file.
-    my $content = read_file($filename);
+    open(my $fh, '<', $filename) || die "error reading $filename $!";
+    my $content = do { local $/; <$fh> };
+    close $fh;
     return $content;
 }
 
@@ -240,6 +247,13 @@ expression.  For example:
     match => qr/\.(:pm|pl)$/,
 
 would only match .pm and .pl files under your specified directory.
+
+=item manifest
+
+Specifies the name of your MANIFEST file which will be used as the list
+of files to test instead of I<where> or I<filename_match>.
+
+    manifest => 'MANIFEST',
 
 =back
 

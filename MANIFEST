@@ -15,6 +15,10 @@ t/dirs/normal/one.txt
 t/dirs/normal/three.pm
 t/dirs/normal/two.pl
 t/dirs/types/normal.txt
+t/dirs/manifest/MANIFEST
+t/dirs/manifest/alsogood.txt
+t/dirs/manifest/good.txt
+t/dirs/manifest/bad.txt
 t/format_results.t
 t/list_files.t
 t/load_file.t
@@ -22,5 +26,6 @@ t/scan_file.t
 t/skip_all.t
 t/test-fixme.t
 t/skip_git.t
+t/manifest.t
 META.yml                                 Module meta-data (added by MakeMaker)
 META.json
