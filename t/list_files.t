@@ -1,7 +1,8 @@
 use strict;
 use warnings;
-
-use Test::More tests => 13;
+use FindBin ();
+use File::Spec;
+use Test::More tests => 14;
 
 # Load the module.
 use_ok 'Test::Fixme';
@@ -10,7 +11,7 @@ use_ok 'Test::Fixme';
     local $SIG{__WARN__} = sub { 1 };
     eval { my @files = Test::Fixme::list_files('t/i/do/not/exist'); };
     ok $@, 'list_files died';
-    ok $@ =~ m:^The directory 't/i/do/not/exist' does not exist:,
+    ok $@ =~ m:^'t/i/do/not/exist' does not exist:,
       "check that non-existent directory causes 'die'";
 }
 
@@ -77,4 +78,10 @@ SKIP: {    # Check that non files do not get returned.
         "check that non files are not returned from '$dir'" );
 
     ok unlink($symlink), "delete symlinked file";
+}
+
+{   # Test that you can pass in just a file
+    my @list = eval { Test::Fixme::list_files(File::Spec->catfile($FindBin::Bin, 'dirs', 'normal', 'three.pm')) };
+    diag $@ if $@;
+    like $list[0], qr{three.pm$}, "can give list_files directories or files";
 }

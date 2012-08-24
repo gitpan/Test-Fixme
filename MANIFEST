@@ -27,5 +27,5 @@ t/skip_all.t
 t/test-fixme.t
 t/skip_git.t
 t/manifest.t
-META.yml                                 Module meta-data (added by MakeMaker)
-META.json
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

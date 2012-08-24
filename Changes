@@ -1,5 +1,8 @@
 Changes
 
+0.07
+     - Allow specifying files in addition to directories.
+
 0.06
      - Remove dep on File::Slurp
      - Added manifest option

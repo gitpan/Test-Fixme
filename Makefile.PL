@@ -6,7 +6,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     'ABSTRACT_FROM'    => 'lib/Test/Fixme.pm',
-    'AUTHOR'           => [ 'Graham Ollis <plicease@wdlabs.com>', 'Edmund von der Burg <evdb@ecclestoad.co.uk>' ],
+    'AUTHOR'           => [ 'Graham Ollis <plicease@cpan.org>', 'Edmund von der Burg <evdb@ecclestoad.co.uk>' ],
     'NAME'             => 'Test::Fixme',
     'VERSION_FROM'     => 'lib/Test/Fixme.pm',
     'LICENSE'          => 'perl',

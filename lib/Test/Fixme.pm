@@ -14,7 +14,7 @@ use vars qw( @ISA @EXPORT );
 @EXPORT = qw( run_tests );
 
 our $VERSION;
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 my $Test = Test::Builder->new;
 
@@ -139,7 +139,7 @@ sub list_files {
     foreach my $path (@paths) {
 
         # Die if we got a bad dir.
-        croak "The directory '$path' does not exist" unless -d $path;
+        croak "'$path' does not exist" unless -e $path;
     }
 
     my @files;
@@ -174,7 +174,7 @@ sub load_file {
     return undef unless -f $filename;
 
     # Slurp the file.
-    open(my $fh, '<', $filename) || die "error reading $filename $!";
+    open(my $fh, '<', $filename) || croak "error reading $filename $!";
     my $content = do { local $/; <$fh> };
     close $fh;
     return $content;
@@ -278,7 +278,7 @@ L<Devel::FIXME>
 
 =head1 AUTHOR
 
-Current maintainer: Graham Ollis E<lt>plicease@wdlabs.comE<gt>
+Current maintainer: Graham Ollis E<lt>plicease@cpan.orgE<gt>
 
 Please let me know if you have any comments or suggestions.
 

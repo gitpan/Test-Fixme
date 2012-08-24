@@ -1,7 +1,7 @@
 ---
 abstract: 'check code for FIXMEs.'
 author:
-  - 'Graham Ollis <plicease@wdlabs.com>'
+  - 'Graham Ollis <plicease@cpan.org>'
   - 'Edmund von der Burg <evdb@ecclestoad.co.uk>'
 build_requires:
   ExtUtils::MakeMaker: 0
@@ -29,4 +29,4 @@ resources:
   bugtracker: https://github.com/plicease/Test-Fixme/issues
   homepage: http://search.cpan.org/dist/Test-Fixme/
   repository: git://github.com/plicease/Test-Fixme.git
-version: 0.06
+version: 0.07
