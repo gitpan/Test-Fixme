@@ -1,4 +1,7 @@
-Changes
+Revision history for Test-Fixme
+
+0.08      2013-01-15 12:19:43 America/New_York
+  - Converted distribution to Dist::Zilla
 
 0.07
      - Allow specifying files in addition to directories.

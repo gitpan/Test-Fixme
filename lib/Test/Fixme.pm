@@ -13,8 +13,7 @@ use vars qw( @ISA @EXPORT );
 @ISA    = qw(Exporter);
 @EXPORT = qw( run_tests );
 
-our $VERSION;
-$VERSION = '0.07';
+our $VERSION = '0.08'; # VERSION
 
 my $Test = Test::Builder->new;
 
@@ -190,16 +189,16 @@ Test::Fixme - check code for FIXMEs.
  
 =head1 SYNOPSIS
  
-    # In a test script like 't/test-fixme.t'
-    use Test::Fixme;
-    run_tests();
-
-    # You can also tailor the behaviour.
-    use Test::Fixme;
-    run_tests( where    => 'lib',      # where to find files to check
-               match    => 'TODO',     # what to check for
-               skip_all => $ENV{SKIP}  # should all tests be skipped
-    );
+ # In a test script like 't/test-fixme.t'
+ use Test::Fixme;
+ run_tests();
+ 
+ # You can also tailor the behaviour.
+ use Test::Fixme;
+ run_tests( where    => 'lib',      # where to find files to check
+            match    => 'TODO',     # what to check for
+            skip_all => $ENV{SKIP}  # should all tests be skipped
+ );
 
 =head1 DESCRIPTION
  
@@ -220,9 +219,9 @@ By default run_tests will search for 'FIXME' in all the files it can
 find in the project. You can change these defaults by using 'where' or
 'match' as follows:
 
-    run_tests( where => 'lib', # just check the modules.
-               match => 'TODO' # look for things that are not done yet.
-    );
+ run_tests( where => 'lib', # just check the modules.
+            match => 'TODO' # look for things that are not done yet.
+ );
 
 =over 4
 
@@ -237,14 +236,14 @@ directory names.
 Expression to search for within the files.  This may be a simple
 string, or a qr//-quoted regular expression.  For example:
 
-    match => qr/[T]ODO|[F]IXME|[B]UG/,
+ match => qr/[T]ODO|[F]IXME|[B]UG/,
 
 =item filename_match
 
 Expression to filter file names.  This should be a qr//-quoted regular
 expression.  For example:
 
-    match => qr/\.(:pm|pl)$/,
+ match => qr/\.(:pm|pl)$/,
 
 would only match .pm and .pl files under your specified directory.
 
@@ -253,7 +252,7 @@ would only match .pm and .pl files under your specified directory.
 Specifies the name of your MANIFEST file which will be used as the list
 of files to test instead of I<where> or I<filename_match>.
 
-    manifest => 'MANIFEST',
+ manifest => 'MANIFEST',
 
 =back
 
@@ -262,12 +261,12 @@ of files to test instead of I<where> or I<filename_match>.
 If you want to match something other than 'FIXME' then you may find
 that the test file itself is being caught. Try doing this:
 
-    run_tests( match => 'TO'.'DO' );
+ run_tests( match => 'TO'.'DO' );
 
 You may also wish to suppress the tests - try this:
 
-    use Test::Fixme;
-    run_tests( skip_all => $ENV{SKIP_TEST_FIXME} );
+ use Test::Fixme;
+ run_tests( skip_all => $ENV{SKIP_TEST_FIXME} );
 
 You can only run run_tests once per file. Please use several test
 files if you want to run several different tests.
