@@ -4,7 +4,7 @@
       "Graham Ollis <plicease@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300028, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300031, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -31,6 +31,17 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.08"
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/plicease/test-fixme/issues"
+      },
+      "homepage" : "http://search.mcpan.org/dist/Test-Fixme",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/plicease/test-fixme.git",
+         "web" : "https://github.com/plicease/test-fixme"
+      }
+   },
+   "version" : "0.09"
 }
 

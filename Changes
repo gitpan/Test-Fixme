@@ -1,5 +1,8 @@
 Revision history for Test-Fixme
 
+0.09      2013-03-21 11:15:08 America/New_York
+  - Add proper resource links to META.json,yml
+
 0.08      2013-01-15 12:19:43 America/New_York
   - Converted distribution to Dist::Zilla
 

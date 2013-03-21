@@ -13,7 +13,7 @@ use vars qw( @ISA @EXPORT );
 @ISA    = qw(Exporter);
 @EXPORT = qw( run_tests );
 
-our $VERSION = '0.08'; # VERSION
+our $VERSION = '0.09'; # VERSION
 
 my $Test = Test::Builder->new;
 
