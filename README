@@ -1,6 +1,9 @@
 NAME
     Test::Fixme - check code for FIXMEs.
 
+VERSION
+    version 0.10
+
 SYNOPSIS
      # In a test script like 't/test-fixme.t'
      use Test::Fixme;
@@ -25,7 +28,8 @@ DESCRIPTION
     Test::Fixme allows you to add a test file that ensures that none of
     these get forgotten in the module.
 
-  Arguments
+METHODS
+  run_tests
     By default run_tests will search for 'FIXME' in all the files it can
     find in the project. You can change these defaults by using 'where' or
     'match' as follows:
@@ -36,8 +40,8 @@ DESCRIPTION
 
     where
         Specifies where to search for files. This can be a scalar containing
-        a single directory name, or it can be a listref containing multiple
-        directory names.
+        a single directory name, or it can be a list reference containing
+        multiple directory names.
 
     match
         Expression to search for within the files. This may be a simple
@@ -76,22 +80,23 @@ HINTS
 SEE ALSO
     Devel::FIXME
 
-AUTHOR
-    Current maintainer: Graham Ollis <plicease@cpan.org>
-
-    Please let me know if you have any comments or suggestions.
-
-    Original author: Edmund von der Burg <evdb@ecclestoad.co.uk>
-
 ACKNOWLEDGMENTS
     Dave O'Neill added support for 'filename_match' and also being able to
     pass a list of several directories in the 'where' argument. Many thanks.
 
-LICENSE
-    Copryight (C) 2008 Edmund von der Burg
+AUTHOR
+    original author: Edmund von der Burg
 
-    Copyright (C) 2012 Graham Ollis
+    current maintainer: Graham Ollis <plicease@cpan.org>
 
-    This library is free software . You can redistribute it and/or modify it
-    under the same terms as perl itself.
+    contributors:
+
+    Dave O'Neill
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2013 by Edmund von der Burg
+    <evdb@ecclestoad.co.uk>, Graham Ollis <plicease@cpan.org>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 

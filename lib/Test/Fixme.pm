@@ -13,7 +13,8 @@ use vars qw( @ISA @EXPORT );
 @ISA    = qw(Exporter);
 @EXPORT = qw( run_tests );
 
-our $VERSION = '0.09'; # VERSION
+# ABSTRACT: check code for FIXMEs.
+our $VERSION = '0.10'; # VERSION
 
 my $Test = Test::Builder->new;
 
@@ -181,14 +182,18 @@ sub load_file {
 
 1;
 
-__END__
+=pod
 
 =head1 NAME
- 
+
 Test::Fixme - check code for FIXMEs.
- 
+
+=head1 VERSION
+
+version 0.10
+
 =head1 SYNOPSIS
- 
+
  # In a test script like 't/test-fixme.t'
  use Test::Fixme;
  run_tests();
@@ -201,7 +206,7 @@ Test::Fixme - check code for FIXMEs.
  );
 
 =head1 DESCRIPTION
- 
+
 When coding it is common to come up against problems that need to be
 addressed but that are not a big deal at the moment. What generally
 happens is that the coder adds comments like:
@@ -213,7 +218,9 @@ happens is that the coder adds comments like:
 L<Test::Fixme> allows you to add a test file that ensures that none of
 these get forgotten in the module.
 
-=head2 Arguments
+=head1 METHODS
+
+=head2 run_tests
 
 By default run_tests will search for 'FIXME' in all the files it can
 find in the project. You can change these defaults by using 'where' or
@@ -228,7 +235,7 @@ find in the project. You can change these defaults by using 'where' or
 =item where
 
 Specifies where to search for files.  This can be a scalar containing a
-single directory name, or it can be a listref containing multiple
+single directory name, or it can be a list reference containing multiple
 directory names.
 
 =item match
@@ -275,28 +282,31 @@ files if you want to run several different tests.
 
 L<Devel::FIXME>
 
-=head1 AUTHOR
-
-Current maintainer: Graham Ollis E<lt>plicease@cpan.orgE<gt>
-
-Please let me know if you have any comments or suggestions.
-
-Original author: Edmund von der Burg E<lt>evdb@ecclestoad.co.ukE<gt>
-
 =head1 ACKNOWLEDGMENTS
 
 Dave O'Neill added support for 'filename_match' and also being able to pass a
 list of several directories in the 'where' argument. Many thanks.
 
-=head1 LICENSE
+=head1 AUTHOR
 
-Copryight (C) 2008 Edmund von der Burg
+original author: Edmund von der Burg
 
-Copyright (C) 2012 Graham Ollis
+current maintainer: Graham Ollis <plicease@cpan.org>
 
-This library is free software . You can redistribute it and/or modify it under
-the same terms as perl itself.
+contributors:
+
+Dave O'Neill
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Edmund von der Burg <evdb@ecclestoad.co.uk>, Graham Ollis <plicease@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
+
+__END__
+
 
 1;

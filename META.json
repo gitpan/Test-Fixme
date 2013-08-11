@@ -4,7 +4,7 @@
       "Graham Ollis <plicease@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300031, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140",
    "license" : [
       "perl_5"
    ],
@@ -22,11 +22,24 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
+            "Exporter" : "0",
             "ExtUtils::MakeMaker" : "0",
+            "ExtUtils::Manifest" : "0",
             "File::Find" : "0",
             "Test::Builder" : "0",
             "Test::More" : "0",
-            "perl" : "5.006"
+            "perl" : "5.006",
+            "strict" : "0",
+            "vars" : "0",
+            "warnings" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "File::Spec" : "0",
+            "File::Temp" : "0",
+            "FindBin" : "0",
+            "Test::More" : "0"
          }
       }
    },
@@ -42,6 +55,6 @@
          "web" : "https://github.com/plicease/test-fixme"
       }
    },
-   "version" : "0.09"
+   "version" : "0.10"
 }
 

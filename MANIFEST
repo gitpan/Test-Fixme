@@ -1,4 +1,6 @@
+.travis.yml
 Changes
+INSTALL
 LICENSE
 MANIFEST
 META.json
@@ -31,3 +33,12 @@ t/scan_file.t
 t/skip_all.t
 t/skip_git.t
 t/test-fixme.t
+xt/release/build_environment.t
+xt/release/changes.t
+xt/release/eol.t
+xt/release/no_tabs.t
+xt/release/pod.t
+xt/release/pod_coverage.t
+xt/release/pod_spelling_common.t
+xt/release/pod_spelling_system.t
+xt/release/release.yml
