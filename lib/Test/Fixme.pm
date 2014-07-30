@@ -1,5 +1,6 @@
 package Test::Fixme;
 
+require 5.6.2;
 use strict;
 use warnings;
 
@@ -9,12 +10,11 @@ use ExtUtils::Manifest qw( maniread );
 
 use Test::Builder;
 require Exporter;
-use vars qw( @ISA @EXPORT );
-@ISA    = qw(Exporter);
-@EXPORT = qw( run_tests );
+our @ISA    = qw( Exporter  );
+our @EXPORT = qw( run_tests );
 
-# ABSTRACT: check code for FIXMEs.
-our $VERSION = '0.10'; # VERSION
+# ABSTRACT: Check code for FIXMEs.
+our $VERSION = '0.11'; # VERSION
 
 my $Test = Test::Builder->new;
 
@@ -184,13 +184,15 @@ sub load_file {
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-Test::Fixme - check code for FIXMEs.
+Test::Fixme - Check code for FIXMEs.
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -299,7 +301,7 @@ Dave O'Neill
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Edmund von der Burg <evdb@ecclestoad.co.uk>, Graham Ollis <plicease@cpan.org>.
+This software is copyright (c) 2014 by Edmund von der Burg <evdb@ecclestoad.co.uk>, Graham Ollis <plicease@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
