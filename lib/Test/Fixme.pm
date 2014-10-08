@@ -1,6 +1,6 @@
 package Test::Fixme;
 
-require 5.6.2;
+require 5.006002;
 use strict;
 use warnings;
 
@@ -14,7 +14,7 @@ our @ISA    = qw( Exporter  );
 our @EXPORT = qw( run_tests );
 
 # ABSTRACT: Check code for FIXMEs.
-our $VERSION = '0.11'; # VERSION
+our $VERSION = '0.12'; # VERSION
 
 my $Test = Test::Builder->new;
 
@@ -24,8 +24,10 @@ sub run_tests {
     my %args = @_;
     $args{match} = 'FIXME' unless defined $args{match} && length $args{match};
     $args{where} = '.'     unless defined $args{where} && length $args{where};
+    $args{warn}  = 0       unless defined $args{warn}  && length $args{warn};
     $args{filename_match} = qr/./
       unless defined $args{filename_match} && length $args{filename_match};
+    my $first = 1;
 
     # Skip all tests if instructed to.
     $Test->skip_all("All tests skipped.") if $args{skip_all};
@@ -42,15 +44,11 @@ sub run_tests {
     # Check ech file in turn.
     foreach my $file (@files) {
         my $results = scan_file( file => $file, match => $args{match} );
-
-        if ( scalar @$results == 0 ) {
-            $Test->ok( 1, "'$file'" );
-            next;
-        }
-        else {
-            $Test->ok( 0, "'$file'" );
-            $Test->diag( format_file_results($results) );
-        }
+        my $ok = scalar @$results == 0;
+        $Test->ok($ok || $args{warn}, "'$file'");
+        next if $ok;
+        $Test->diag('') if $first++;
+        $Test->diag(format_file_results($results));
     }
 }
 
@@ -192,7 +190,7 @@ Test::Fixme - Check code for FIXMEs.
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -262,6 +260,12 @@ Specifies the name of your MANIFEST file which will be used as the list
 of files to test instead of I<where> or I<filename_match>.
 
  manifest => 'MANIFEST',
+
+=item warn
+
+Do not fail when a FIXME or other pattern is matched.  Tests that would
+have been failures will still issue a diagnostic that will be viewed
+when you run C<prove> without C<-v>, C<make test> or C<./Build test>.
 
 =back
 

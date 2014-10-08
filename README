@@ -4,7 +4,7 @@ NAME
 
 VERSION
 
-    version 0.11
+    version 0.12
 
 SYNOPSIS
 
@@ -72,6 +72,12 @@ METHODS
       list of files to test instead of where or filename_match.
 
        manifest => 'MANIFEST',
+
+    warn
+
+      Do not fail when a FIXME or other pattern is matched. Tests that
+      would have been failures will still issue a diagnostic that will be
+      viewed when you run prove without -v, make test or ./Build test.
 
 HINTS
 
