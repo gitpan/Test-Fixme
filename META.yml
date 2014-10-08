@@ -18,4 +18,4 @@ resources:
   bugtracker: https://github.com/plicease/test-fixme/issues
   homepage: http://search.mcpan.org/dist/Test-Fixme
   repository: git://github.com/plicease/test-fixme.git
-version: '0.12'
+version: '0.14'

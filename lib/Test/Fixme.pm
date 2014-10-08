@@ -14,7 +14,7 @@ our @ISA    = qw( Exporter  );
 our @EXPORT = qw( run_tests );
 
 # ABSTRACT: Check code for FIXMEs.
-our $VERSION = '0.12'; # VERSION
+our $VERSION = '0.14'; # VERSION
 
 my $Test = Test::Builder->new;
 
@@ -190,7 +190,7 @@ Test::Fixme - Check code for FIXMEs.
 
 =head1 VERSION
 
-version 0.12
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -213,7 +213,7 @@ happens is that the coder adds comments like:
 
  # FIXME - what about windows that are bigger than the screen?
 
- # FIXME - add checking of user priviledges here.
+ # FIXME - add checking of user privileges here.
 
 L<Test::Fixme> allows you to add a test file that ensures that none of
 these get forgotten in the module.
@@ -302,6 +302,8 @@ current maintainer: Graham Ollis <plicease@cpan.org>
 contributors:
 
 Dave O'Neill
+
+gregor herrmann <gregoa@debian.org>
 
 =head1 COPYRIGHT AND LICENSE
 

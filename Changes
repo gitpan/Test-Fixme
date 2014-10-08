@@ -1,5 +1,8 @@
 Revision history for Test-Fixme
 
+0.14      2014-10-08 07:59:57 -0400
+  - fixed missing merge from 0.12
+
 0.12      2014-10-08 07:57:04 -0400
   - add warn option
 

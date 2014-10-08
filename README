@@ -4,7 +4,7 @@ NAME
 
 VERSION
 
-    version 0.12
+    version 0.14
 
 SYNOPSIS
 
@@ -27,7 +27,7 @@ DESCRIPTION
 
      # FIXME - what about windows that are bigger than the screen?
     
-     # FIXME - add checking of user priviledges here.
+     # FIXME - add checking of user privileges here.
 
     Test::Fixme allows you to add a test file that ensures that none of
     these get forgotten in the module.
@@ -113,6 +113,8 @@ AUTHOR
     contributors:
 
     Dave O'Neill
+
+    gregor herrmann <gregoa@debian.org>
 
 COPYRIGHT AND LICENSE
 
